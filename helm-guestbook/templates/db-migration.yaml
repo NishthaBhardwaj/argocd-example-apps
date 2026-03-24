@@ -8,7 +8,7 @@ metadata:
 
 spec:
   backOffLimit: 2
-  tempate:
+  template:
     spec:
       restartPolicy: Never
       containers:
