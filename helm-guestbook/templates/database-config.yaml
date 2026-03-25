@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config-wave-1
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+data:
+  host: "postgres"
+  dbUser: "basket_db"
+  dbPassword: "basket_db123"
+

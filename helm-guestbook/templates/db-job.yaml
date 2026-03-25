@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-job-wave-2
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    metadata:
+      name: db-job-wave-2
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sh", "-c", "echo 'Running db migration'; sleep 10; echo \"$DB_HOST\"; echo 'Done!'"]
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: db-config-wave-1
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: dbUser
+                  name: db-config-wave-1
+            - name: dbPassword
+              valueFrom:
+                configMapKeyRef:
+                  key: dbPassword
+                  name: db-config-wave-1
+
+
